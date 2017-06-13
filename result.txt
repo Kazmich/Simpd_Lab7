@@ -1,0 +1,77 @@
+Time: 0.0 secs
+
+> plot(treeModel)
+> library("C50")
+> data <- matrix(c(1000, 1300, 1000, 1300, 1200, 1300, 1400, 1200, 1300, 1100,
++                  7, 6, 5, 6, 7, 6, 9, 7, 6, 6.5,
++                  42, 53, 60, 42, 60, 53, 42, 60, 60, 54,
++                  1199, 1399, 799, 1599, 1249, 1249, 3199, 1899, 1079, 1599), 10, 4)
+> labels <- c("1", "2", "3", "4","5")
+> result <- c(1, 4, 5, 4, 3, 4, 1, 2, 3, 2)
+> test <- factor(result, labels)
+> colnames(data) <- c("Speed", "Capacity", "Size", "Price")
+> treeModel <- C5.0(x = data[,], y = test)
+> treeModel
+
+Call:
+C5.0.default(x = data[, ], y = test)
+
+Classification Tree
+Number of samples: 10 
+Number of predictors: 4 
+
+Tree size: 4 
+
+Non-standard options: attempt to group attributes
+
+> summary(treeModel)
+
+Call:
+C5.0.default(x = data[, ], y = test)
+
+
+C5.0 [Release 2.07 GPL Edition]  	Tue Jun 13 17:39:18 2017
+-------------------------------
+
+Class specified by attribute `outcome'
+
+Read 10 cases (5 attributes) from undefined.data
+
+Decision tree:
+
+Size <= 53:
+:...Capacity <= 6.5: 4 (3)
+:   Capacity > 6.5: 1 (2)
+Size > 53:
+:...Price <= 1399: 3 (3/1)
+    Price > 1399: 2 (2)
+
+
+Evaluation on training data (10 cases):
+
+	    Decision Tree   
+	  ----------------  
+	  Size      Errors  
+
+	     4    1(10.0%)   <<
+
+
+	   (a)   (b)   (c)   (d)   (e)    <-classified as
+	  ----  ----  ----  ----  ----
+	     2                            (a): class 1
+	           2                      (b): class 2
+	                 2                (c): class 3
+	                       3          (d): class 4
+	                 1                (e): class 5
+
+
+	Attribute usage:
+
+	100.00%	Size
+	 50.00%	Capacity
+	 50.00%	Price
+
+
+Time: 0.0 secs
+
+> plot(treeModel)
